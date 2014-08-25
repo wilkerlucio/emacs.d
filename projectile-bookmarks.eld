@@ -1,0 +1,1 @@
+("~/Development/hpb/" "~/Development/sm2/smgui/" "~/Development/cadegp/")
