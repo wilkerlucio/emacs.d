@@ -32,6 +32,9 @@
 ;; general package initialize
 (package-initialize)
 
+;; auto-indent
+(define-key global-map (kbd "RET") 'newline-and-indent)
+
 ;; pbcopy
 (require 'pbcopy)
 (turn-on-pbcopy)
