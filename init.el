@@ -3,17 +3,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#ad7fa8" "#8cc4ff" "#eeeeec"])
- '(background-color "#7f7f7f")
- '(background-mode dark)
- '(cursor-color "#5c5cff")
- '(custom-enabled-themes (quote (tango-dark)))
- '(custom-safe-themes (quote ("1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
- '(doremi-down-keys (quote (j down)))
- '(doremi-up-keys (quote (k up)))
+ '(custom-safe-themes (quote ("645599a2aab022fd7677124515a3104a60ba64d2cafdd77a6e7703f8ae97250c" "1989847d22966b1403bab8c674354b4a2adf6e03e0ffebe097a6bd8a32be1e19" "7d4d00a2c2a4bba551fcab9bfd9186abe5bfa986080947c2b99ef0b4081cb2a6" "c7359bd375132044fe993562dfa736ae79efc620f68bab36bd686430c980df1c" "90b5269aefee2c5f4029a6a039fb53803725af6f5c96036dee5dc029ff4dff60" "0ebe0307942b6e159ab794f90a074935a18c3c688b526a2035d14db1214cf69c" "a774c5551bc56d7a9c362dca4d73a374582caedb110c201a09b410c0ebbb5e70" "e26780280b5248eb9b2d02a237d9941956fc94972443b0f7aeec12b5c15db9f3" "33c5a452a4095f7e4f6746b66f322ef6da0e770b76c0ed98a438e76c497040bb" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
  '(evil-want-C-u-scroll t)
  '(foreground-color "#5c5cff")
  '(inhibit-startup-screen t)
+ '(linum-format " %7i ")
  '(menu-bar-mode nil)
  '(package-archives (quote (("marmalade" . "http://marmalade-repo.org/packages/") ("melpa" . "http://melpa-stable.milkbox.net/packages/") ("gnu" . "http://elpa.gnu.org/packages/")))))
 (custom-set-faces
@@ -21,10 +15,29 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(rainbow-delimiters-depth-1-face ((t (:foreground "dark red"))))
+ '(rainbow-delimiters-depth-2-face ((t (:foreground "dark green"))))
+ '(rainbow-delimiters-depth-3-face ((t (:foreground "deep pink"))))
+ '(rainbow-delimiters-depth-4-face ((t (:foreground "yellow"))))
+ '(rainbow-delimiters-depth-5-face ((t (:foreground "green"))))
+ '(rainbow-delimiters-depth-6-face ((t (:foreground "light blue"))))
+ '(rainbow-delimiters-depth-7-face ((t (:foreground "orange"))))
+ '(rainbow-delimiters-depth-8-face ((t (:foreground "slate blue"))))
+ '(rainbow-delimiters-depth-9-face ((t (:foreground "light gray"))))
+ '(rainbow-delimiters-unmatched-face ((t (:foreground "white")))))
 
 ;; general package initialize
 (package-initialize)
+
+;; theme
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(load-theme 'sunburst)
+
+;; rainbow delimiters
+(global-rainbow-delimiters-mode)
+
+;; no backup files
+(setq make-backup-files nil)
 
 ;; flx-ido setup
 (require 'flx-ido)
@@ -50,6 +63,8 @@
 ;; projectile
 (projectile-global-mode)
 
+(add-hook 'projectile-mode-hook 'projectile-rails-on)
+
 ;; smex
 (global-set-key (kbd "M-x") 'smex)
 
@@ -74,6 +89,7 @@
 (evil-leader/set-key-for-mode 'ruby-mode "t r" 'rspec-verify-single)
 (evil-leader/set-key-for-mode 'ruby-mode "r" 'rspec-rerun)
 
+
 ;;;;;;;;;;;;;;;;;;;;;;
 ;; regular key maps ;;
 ;;;;;;;;;;;;;;;;;;;;;;
@@ -88,8 +104,8 @@
 ;; clojure
 (eval-after-load 'clojure
   '(progn
-     (define-key clojure-mode-map (kbd "C-c l l") 'align-cljlet)
-     (define-key clojure-mode-map (kbd "C-M-z")   'align-cljlet)))
+     (evil-leader/set-key-for-mode 'clojure-mode "r" 'cider-test-run-tests)
+     ))
 
 (add-hook 'clojure-mode-hook (lambda ()
                                (clj-refactor-mode 1)
@@ -98,6 +114,7 @@
 ;; paredit
 (eval-after-load 'paredit
   '(progn
+     (define-key paredit-mode-map (kbd "RET") 'paredit-newline)
      (define-key paredit-mode-map (kbd "C-c l k") 'paredit-splice-sexp-killing-forward)
      (define-key paredit-mode-map (kbd "C-c l w") 'paredit-splice-sexp-killing-backward)
      (define-key paredit-mode-map (kbd "C-c l l") 'align-cljlet)
