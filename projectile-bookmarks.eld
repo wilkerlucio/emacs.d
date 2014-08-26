@@ -1,1 +1,1 @@
-("~/.emacs.d/" "~/Development/node-webkit-build/" "~/Development/cadegp/" "~/Development/Experiments/clojure-learn/" "~/Development/hpb/" "~/Development/sm2/smgui/")
+("~/Development/node-webkit-build/" "~/.emacs.d/" "~/Development/cadegp/" "~/Development/Experiments/clojure-learn/" "~/Development/hpb/" "~/Development/sm2/smgui/")

@@ -89,6 +89,9 @@
 (evil-leader/set-key-for-mode 'ruby-mode "t r" 'rspec-verify-single)
 (evil-leader/set-key-for-mode 'ruby-mode "r" 'rspec-rerun)
 
+(evil-leader/set-key-for-mode 'cider-mode "r" 'cider-test-rerun-tests)
+(evil-leader/set-key-for-mode 'cider-mode "t r" 'cider-test-run-test)
+(evil-leader/set-key-for-mode 'cider-mode "t t" 'cider-test-run-tests)
 
 ;;;;;;;;;;;;;;;;;;;;;;
 ;; regular key maps ;;
@@ -102,11 +105,6 @@
 (global-set-key (kbd "M-x") 'smex)
 
 ;; clojure
-(eval-after-load 'clojure
-  '(progn
-     (evil-leader/set-key-for-mode 'clojure-mode "r" 'cider-test-run-tests)
-     ))
-
 (add-hook 'clojure-mode-hook (lambda ()
                                (clj-refactor-mode 1)
                                (cljr-add-keybindings-with-prefix "C-c C-m")))
