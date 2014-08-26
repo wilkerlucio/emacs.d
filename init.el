@@ -26,8 +26,15 @@
  '(rainbow-delimiters-depth-9-face ((t (:foreground "light gray"))))
  '(rainbow-delimiters-unmatched-face ((t (:foreground "white")))))
 
+;; load path
+(add-to-list 'load-path "~/.emacs.d/")
+
 ;; general package initialize
 (package-initialize)
+
+;; pbcopy
+(require 'pbcopy)
+(turn-on-pbcopy)
 
 ;; theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
@@ -89,9 +96,9 @@
 (evil-leader/set-key-for-mode 'ruby-mode "t r" 'rspec-verify-single)
 (evil-leader/set-key-for-mode 'ruby-mode "r" 'rspec-rerun)
 
-(evil-leader/set-key-for-mode 'cider-mode "r" 'cider-test-rerun-tests)
-(evil-leader/set-key-for-mode 'cider-mode "t r" 'cider-test-run-test)
-(evil-leader/set-key-for-mode 'cider-mode "t t" 'cider-test-run-tests)
+(evil-leader/set-key-for-mode 'clojure-mode "r" 'cider-test-rerun-tests)
+(evil-leader/set-key-for-mode 'clojure-mode "t r" 'cider-test-run-test)
+(evil-leader/set-key-for-mode 'clojure-mode "t t" 'cider-test-run-tests)
 
 ;;;;;;;;;;;;;;;;;;;;;;
 ;; regular key maps ;;
